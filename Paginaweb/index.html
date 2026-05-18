@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Platillos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page">
+        <div class="card">
+            <h1>Iniciar sesión</h1>
+            <p>Accede con tu cuenta de administrador o usuario.</p>
+            <form action="login.php" method="POST">
+                <label>
+                    Usuario
+                    <input type="text" name="username" required>
+                </label>
+                <label>
+                    Contraseña
+                    <input type="password" name="password" required>
+                </label>
+                <button type="submit">Entrar</button>
+            </form>
+            <p class="note">Si no tienes una cuenta, crea un registro en la base de datos con rol <strong>admin</strong> o <strong>viewer</strong>.</p>
+        </div>
+    </div>
+</body>
+</html>
