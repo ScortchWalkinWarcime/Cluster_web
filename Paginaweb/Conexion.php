@@ -1,12 +1,26 @@
 <?php
-$host = "192.168.0.195";
+
+$hosts = [
+    "192.168.9.67", // nodo1
+    "192.168.9.44"  // nodo2
+];
+
 $user = "operador3";
 $pass = "!Oerador#3%";
 $db = "SGR";
 
-$conn = new mysqli($host, $user, $pass, $db);
+$conn = null;
 
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+foreach ($hosts as $host) {
+    $conn = new mysqli($host, $user, $pass, $db);
+    if ($conn->connect_error) {
+        continue; // Intenta el siguiente host
+    } else {
+        break; // Conexión 
+    }
 }
+if ($conn === null || $conn->connect_error) {
+    die("Error de conexión a la base de datos: " . $conn->connect_error);
+}
+
 ?>
