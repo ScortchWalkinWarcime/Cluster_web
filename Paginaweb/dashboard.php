@@ -32,6 +32,7 @@ if (!isset($_SESSION['user'])) {
                 <?php if ($_SESSION['rol'] === 'admin'): ?>
                     <li><a href="indexar_tablas.php">Indexar Tablas</a></li>
                     <li><a href="mantenimiento.php">Configurar Mantenimiento</a></li>
+                    <li><a href="servidores.php">Monitoreo de Servidores</a></li>
                 <?php endif; ?>
                 <li><a href="logout.php">Cerrar sesión</a></li>
             </ul>
