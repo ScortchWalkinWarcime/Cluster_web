@@ -1,68 +1,51 @@
 <?php
 
-include("conexion.php");
+require_once 'Conexion.php';
 
-$sql = "SELECT * FROM auditoria
-        ORDER BY fecha DESC
-        LIMIT 20";
+/** @var mysqli $conn */
+if (!($conn instanceof mysqli)) {
+    die("No hay conexión válida a la base de datos.");
+}
 
-$resultado = $conn->query($sql);
+$query = "
+SELECT *
+FROM auditoria
+ORDER BY fecha DESC
+LIMIT 50
+";
 
-if ($resultado && $resultado->num_rows > 0) {
+$result = $conn->query($query);
 
-    while ($fila = $resultado->fetch_assoc()) {
+if ($result && $result->num_rows > 0) {
 
-        // Color para estado
-        $colorEstado = "w3-green";
-
-        if ($fila['estado'] == "FUERA_HORARIO") {
-            $colorEstado = "w3-red";
-        }
+    while ($fila = $result->fetch_assoc()) {
 
         echo "
-
         <tr>
-
             <td>{$fila['id']}</td>
-
             <td>{$fila['usuario']}</td>
-
             <td>{$fila['accion']}</td>
-
             <td>{$fila['tabla_afectada']}</td>
-
             <td>{$fila['descripcion']}</td>
-
             <td>{$fila['ip']}</td>
-
             <td>
-                <span class='w3-tag $colorEstado'>
-                    {$fila['estado']}
+                <span class='w3-tag w3-green'>
+                    ACTIVO
                 </span>
             </td>
-
             <td>{$fila['fecha']}</td>
-
         </tr>
-
         ";
     }
 
 } else {
 
     echo "
-
     <tr>
-
-        <td colspan='8'
-            class='w3-center w3-text-gray'>
-
-            No hay eventos registrados.
-
+        <td colspan='8'>
+            No hay registros de auditoría.
         </td>
-
     </tr>
-
     ";
 }
 
