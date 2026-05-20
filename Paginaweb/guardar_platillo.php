@@ -2,6 +2,10 @@
 session_start();
 include("conexion.php");
 
+if (!isset($conn) || !($conn instanceof mysqli)) {
+    die("Error de conexión a la base de datos.");
+}
+
 if (file_exists('maintenance.lock') && (!isset($_SESSION['user']) || $_SESSION['rol'] !== 'admin')) {
     $_SESSION['redirect_after_maintenance'] = $_SERVER['REQUEST_URI'];
     include('maintenance.php');

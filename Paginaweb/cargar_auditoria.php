@@ -7,6 +7,20 @@ if (!($conn instanceof mysqli)) {
     die("No hay conexión válida a la base de datos.");
 }
 
+//function registrarAuditoria(
+//    $conn,
+//    $usuario,
+//    $accion,
+//    $tabla,
+//    $descripcion
+//){
+//    $ip = $_SERVER['REMOTE_ADDR'];
+
+//    $sql = "INSERT INTO auditoria (usuario, accion, tabla_afectada,descripcion, ip) VALUES ('$usuario','$accion', 'tabla_afectada', 'descripcion', 'ip')";
+
+//$conn ->query($sql);
+//}
+
 $query = "
 SELECT *
 FROM auditoria

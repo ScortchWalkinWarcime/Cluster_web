@@ -24,7 +24,7 @@ if (!isset($_SESSION['user'])) {
     <div class="page">
         <div class="card">
             <h1>Panel de control</h1>
-            <p>👋 Bienvenido: <strong><?php echo htmlspecialchars($_SESSION['user']); ?></strong></p>
+            <p>Bienvenido: <strong><?php echo htmlspecialchars($_SESSION['user']); ?></strong></p>
             <p class="status <?php echo $_SESSION['rol'] === 'admin' ? 'admin' : 'viewer'; ?>">Rol: <?php echo htmlspecialchars($_SESSION['rol']); ?></p>
             <ul class="menu">
                 <li><a href="ver_platillos.php">Ver Platillos</a></li>
@@ -33,6 +33,8 @@ if (!isset($_SESSION['user'])) {
                     <li><a href="indexar_tablas.php">Indexar Tablas</a></li>
                     <li><a href="mantenimiento.php">Configurar Mantenimiento</a></li>
                     <li><a href="servidores.php">Monitoreo de Servidores</a></li>
+                    <li><a href="auditoria.php">Audotoria de Usuarios</a></li>
+                    <li><a href="reportes_db.php">Servicio de Tablas</a></li>
                 <?php endif; ?>
                 <li><a href="logout.php">Cerrar sesión</a></li>
             </ul>

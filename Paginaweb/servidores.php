@@ -26,7 +26,7 @@ if (!isset($_SESSION['user'])) {
 
         function cargarServidores() {
 
-            fetch('cargar_servidores.php')
+            fetch('carga_servidores.php')
 
             .then(response => response.text())
 
