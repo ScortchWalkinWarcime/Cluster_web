@@ -35,6 +35,7 @@ if (!isset($_SESSION['user'])) {
                     <li><a href="servidores.php">Monitoreo de Servidores</a></li>
                     <li><a href="auditoria.php">Audotoria de Usuarios</a></li>
                     <li><a href="reportes_db.php">Servicio de Tablas</a></li>
+                    <li><a href="anomalias.php">Anomalias</a></li>
                 <?php endif; ?>
                 <li><a href="logout.php">Cerrar sesión</a></li>
             </ul>
