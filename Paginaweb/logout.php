@@ -4,11 +4,15 @@ session_start();
 include("conexion.php");
 
 /** @var mysqli $conn */
+if (!($conn instanceof mysqli)) {
+    die("No hay conexión válida a la base de datos.");
+}
 
 if (isset($_SESSION['usuario'])) {
 
     $usuario = $_SESSION['usuario'];
     $ip = $_SERVER['REMOTE_ADDR'];
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
     $mariadbUserResult = $conn->query("
     SELECT CURRENT_USER() AS usuario_db
@@ -25,7 +29,8 @@ if (isset($_SESSION['usuario'])) {
         accion,
         tabla_afectada,
         descripcion,
-        ip
+        ip,
+        user_agent
     )
     VALUES
     (
@@ -34,6 +39,7 @@ if (isset($_SESSION['usuario'])) {
         'LOGOUT',
         'usuarios',
         'Cierre de sesión del sistema',
+        ?,
         ?
     )
     ");
