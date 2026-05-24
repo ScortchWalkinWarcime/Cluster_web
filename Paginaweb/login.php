@@ -44,6 +44,7 @@ if ($result && $result->num_rows === 1) {
     $_SESSION['rol'] = $user['rol'];
 
     $ip = $_SERVER['REMOTE_ADDR'];
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
 $mariadbUserResult = $conn->query("SELECT CURRENT_USER() AS usuario_db");
 $mariadbUser = $mariadbUserResult->fetch_assoc()['usuario_db'];
@@ -81,7 +82,46 @@ $auditoria->execute();
     header("Location: dashboard.php");
     exit;
 }
+
+$ip = $_SERVER['REMOTE_ADDR'];
+$userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+$mariadbUserResult = $conn->query("SELECT CURRENT_USER() AS usuario_db");
+$mariadbUser = $mariadbUserResult->fetch_assoc()['usuario_db'];
+
+$auditoriaFail = $conn->prepare("
+
+INSERT INTO auditoria
+(
+    usuario,
+    usuario_mariadb,
+    accion,
+    tabla_afectada,
+    descripcion,
+    ip,
+    user_agent
+)
+    VALUES
+    (
+        ?,
+        ?,
+        'LOGIN_FAIL',
+        'usuarios',
+        'Intento fallido de inicio de sesión',
+        ?,
+        ?
+    )");
+
+$auditoriaFail->bind_param(
+    "ssss",
+    $username,
+    $mariadbUser,
+    $ip,
+    $userAgent
+);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
